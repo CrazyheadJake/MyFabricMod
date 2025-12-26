@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/cube",
+  
+  "textures": {
+    "particle": "myfabricmod:block/belt",
+    "up": "myfabricmod:block/belt_end",
+    "down": "myfabricmod:block/belt_end",
+    "north": "myfabricmod:block/belt",
+    "south": "myfabricmod:block/belt",
+    "east": "myfabricmod:block/belt",
+    "west": "myfabricmod:block/belt"
+  }
+}
