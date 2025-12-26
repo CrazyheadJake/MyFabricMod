@@ -21,12 +21,12 @@ public class BeltMenu extends AbstractContainerMenu {
 		this.belt = container;
 		checkContainerSize(container, BeltBlockEntity.BELT_CONTAINER_SIZE);
 		container.startOpen(inventory.player);
-
+		int center_x = 80;
 		for (int j = 0; j < BeltBlockEntity.BELT_CONTAINER_SIZE; j++) {
-			this.addSlot(new Slot(container, j, 44 + j * 18, 20));
+			this.addSlot(new Slot(container, j, center_x, 35));
 		}
 
-		this.addStandardInventorySlots(inventory, 8, 51);
+		this.addStandardInventorySlots(inventory, 8, 84);
 	}
 
 	@Override
