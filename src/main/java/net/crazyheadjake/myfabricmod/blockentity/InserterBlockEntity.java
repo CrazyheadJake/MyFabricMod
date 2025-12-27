@@ -1,5 +1,6 @@
 package net.crazyheadjake.myfabricmod.blockentity;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.jspecify.annotations.Nullable;
@@ -92,7 +93,19 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
 
         Iterator<ItemStack> sourceItemsIterator = null;
         if (sourceAutomation == null) {
-            sourceItemsIterator = source.iterator();
+            if (source instanceof WorldlyContainer worldlyContainer) {
+                // Create an iterator that only goes through these slots
+                int[] slots = worldlyContainer.getSlotsForFace(outputSide);
+                ArrayList<ItemStack> itemsInSlots = new ArrayList<>();
+                for (int slot : slots) {
+                    if (worldlyContainer.getItem(slot).isEmpty() || !worldlyContainer.canTakeItemThroughFace(slot, worldlyContainer.getItem(slot), outputSide)) continue;
+                    itemsInSlots.add(worldlyContainer.getItem(slot));
+                }
+                sourceItemsIterator = itemsInSlots.iterator();
+            } 
+            else {
+                sourceItemsIterator = source.iterator();
+            }
         }
         else
             sourceItemsIterator = sourceAutomation.getItemsIterator();
@@ -110,6 +123,7 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
         while (sourceItemsIterator.hasNext()) {
             ItemStack sourceStack = sourceItemsIterator.next();
             if (sourceStack.isEmpty()) continue;
+            // Check if the target has space for at least 1 item from the source stack
             int space;
             if (targetAutomation != null) {
                 space = targetAutomation.hasSpaceFor(sourceStack);
@@ -118,10 +132,10 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
             }
             if (space <= 0) continue;
 
+            // Insert 1 item into the target
             if (targetAutomation != null) {
                 targetAutomation.insert(sourceStack.split(1));
                 inserterBlockEntity.cooldownTime = INSERTER_SPEED;
-
                 break;
             } else {
                 ItemStack remaining = HopperBlockEntity.addItem(
@@ -136,7 +150,6 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
                     sourceAutomation.setChanged();
                 }
                 inserterBlockEntity.cooldownTime = INSERTER_SPEED;
-
                 break;
             }
 
