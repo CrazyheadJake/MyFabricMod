@@ -1,5 +1,7 @@
 package net.crazyheadjake.myfabricmod;
 
+import net.crazyheadjake.myfabricmod.blockentity.BeltBlockEntity;
+import net.crazyheadjake.myfabricmod.blockentity.InserterBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +13,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 public class ModBlockEntities {
     public static final BlockEntityType<BeltBlockEntity> BELT_BLOCK_ENTITY =
 		register("belt_entity", BeltBlockEntity::new, ModBlocks.BELT);
+    public static final BlockEntityType<InserterBlockEntity> INSERTER_BLOCK_ENTITY =
+		register("inserter_entity", InserterBlockEntity::new, ModBlocks.INSERTER);
     public static void initialize() {
         // Intentionally left blank.
     }

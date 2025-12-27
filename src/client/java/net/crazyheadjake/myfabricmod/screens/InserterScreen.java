@@ -1,18 +1,17 @@
-package net.crazyheadjake.myfabricmod;
+package net.crazyheadjake.myfabricmod.screens;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
+import net.crazyheadjake.myfabricmod.MyFabricMod;
+import net.crazyheadjake.myfabricmod.menu.InserterMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
-public class BeltScreen extends AbstractContainerScreen<BeltMenu> {
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(MyFabricMod.MOD_ID, "textures/gui/container/belt.png");
-    public BeltScreen(BeltMenu abstractContainerMenu, Inventory inventory, Component component) {
+public class InserterScreen extends AbstractContainerScreen<InserterMenu> {
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(MyFabricMod.MOD_ID, "textures/gui/container/inserter.png");
+    public InserterScreen(InserterMenu abstractContainerMenu, Inventory inventory, Component component) {
         super(abstractContainerMenu, inventory, component);
         this.imageWidth = 176;
         this.imageHeight = 166;

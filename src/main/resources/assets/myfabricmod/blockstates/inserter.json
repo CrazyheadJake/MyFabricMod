@@ -1,0 +1,10 @@
+{
+  "variants": {
+      "facing=east": { "model": "myfabricmod:block/inserter", "y": 270, "x": 90 },
+      "facing=south": { "model": "myfabricmod:block/inserter", "y": 0, "x": 90 },
+      "facing=west": { "model": "myfabricmod:block/inserter", "y": 90, "x": 90 },
+      "facing=north": { "model": "myfabricmod:block/inserter", "y": 180, "x": 90 },
+      "facing=up": { "model": "myfabricmod:block/inserter", "x": 180},
+      "facing=down": { "model": "myfabricmod:block/inserter", "x": 0}
+  }
+}

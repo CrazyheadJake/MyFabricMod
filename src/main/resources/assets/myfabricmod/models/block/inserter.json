@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/cube",
+  
+  "textures": {
+    "particle": "myfabricmod:block/inserter",
+    "up": "myfabricmod:block/inserter_end",
+    "down": "myfabricmod:block/inserter_end",
+    "north": "myfabricmod:block/inserter",
+    "south": "myfabricmod:block/inserter",
+    "east": "myfabricmod:block/inserter",
+    "west": "myfabricmod:block/inserter"
+  }
+}

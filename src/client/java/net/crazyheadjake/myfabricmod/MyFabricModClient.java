@@ -1,5 +1,7 @@
 package net.crazyheadjake.myfabricmod;
 
+import net.crazyheadjake.myfabricmod.screens.BeltScreen;
+import net.crazyheadjake.myfabricmod.screens.InserterScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.gui.screens.MenuScreens;
 
@@ -8,5 +10,6 @@ public class MyFabricModClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 		MenuScreens.register(ModMenus.BELT_MENU, BeltScreen::new);
+		MenuScreens.register(ModMenus.INSERTER_MENU, InserterScreen::new);
 	}
 }

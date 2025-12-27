@@ -1,6 +1,8 @@
 {
   "block.myfabricmod.belt": "Conveyor Belt",
+  "block.myfabricmod.inserter": "Inserter",
   "item.myfabricmod.gear": "Iron Gear",
   "itemGroup.myfabricmod.automation": "Automation",
-  "container.belt": "Belt"
+  "automation.inserter": "Inserter",
+  "automation.belt": "Belt"
 }
