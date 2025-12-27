@@ -45,7 +45,12 @@ public class BeltBlockEntity extends BlockEntity implements MenuProvider, Automa
             this.items.add(ItemStack.EMPTY);
         }
         ContainerHelper.loadAllItems(valueInput, this.items);
-
+        for (int i = 0; i < BELT_CONTAINER_SIZE; i++) {
+            if (this.items.get(i) == ItemStack.EMPTY) {
+                this.items.remove(i);
+                i--;
+            }
+        }
         this.cooldownTime = valueInput.getIntOr("TransferCooldown", -1);
    }
 
