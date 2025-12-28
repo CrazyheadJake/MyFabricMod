@@ -1,6 +1,7 @@
 package net.crazyheadjake.myfabricmod.menu;
 
 import net.crazyheadjake.myfabricmod.ModMenus;
+import net.crazyheadjake.myfabricmod.OutputSlot;
 import net.crazyheadjake.myfabricmod.blockentity.BeltBlockEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -15,20 +16,24 @@ public class BeltMenu extends AbstractContainerMenu {
 
 
 	public BeltMenu(int i, Inventory inventory) {
-		this(i, inventory, (BeltBlockEntity) null);
+		this(i, inventory, new SimpleContainer(BeltBlockEntity.BELT_CONTAINER_SIZE));
 	}
 
-	public BeltMenu(int i, Inventory inventory, BeltBlockEntity blockEntity) {
+	public BeltMenu(int i, Inventory inventory, Container container) {
 		super(ModMenus.BELT_MENU, i);
-		this.belt = blockEntity;
-		this.container = new SimpleContainer(BeltBlockEntity.BELT_CONTAINER_SIZE);
+		this.belt = null;
+		this.container = container;
 		this.container.startOpen(inventory.player);
-		// int center_x = 80;
-		// for (int j = 0; j < BeltBlockEntity.BELT_CONTAINER_SIZE; j++) {
-		// 	this.addSlot(new Slot(container, j, center_x, 35));
-		// }
+		int center_x = 71;
+		for (int j = 0; j < BeltBlockEntity.BELT_CONTAINER_SIZE; j++) {
+			this.addSlot(new OutputSlot(this.container, j, j * 18 + center_x - 18, 35));
+		}
 
 		this.addStandardInventorySlots(inventory, 8, 84);
+	}
+
+	public BeltBlockEntity getBeltBlockEntity() {
+		return this.belt;
 	}
 
 	@Override

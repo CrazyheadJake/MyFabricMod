@@ -6,7 +6,6 @@ import com.mojang.serialization.MapCodec;
 
 import net.crazyheadjake.myfabricmod.ModBlockEntities;
 import net.crazyheadjake.myfabricmod.blockentity.BeltBlockEntity;
-import net.crazyheadjake.myfabricmod.blockentity.InserterBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;

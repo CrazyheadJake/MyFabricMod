@@ -14,18 +14,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class BeltBlockEntity extends BlockEntity implements MenuProvider, AutomationContainer {
+public class BeltBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider, AutomationContainer {
     public static final int BELT_CONTAINER_SIZE = 4;
     public static final int BELT_SPEED = 4;
     private int cooldownTime = -1;
@@ -67,17 +67,8 @@ public class BeltBlockEntity extends BlockEntity implements MenuProvider, Automa
     }
 
     @Override
-    public Component getDisplayName() {
-        return DEFAULT_NAME;
-    }
-
-    private int getSize() {
-        return this.items.size();
-    }
-
-    @Override
     public int insert(ItemStack itemStack) {
-        int spaceAvailable = BELT_CONTAINER_SIZE - this.getSize();
+        int spaceAvailable = BELT_CONTAINER_SIZE - this.getContainerSize();
         if (spaceAvailable <= 0) {
             return 0;
         }
@@ -110,7 +101,7 @@ public class BeltBlockEntity extends BlockEntity implements MenuProvider, Automa
 
     @Override
     public int hasSpaceFor(ItemStack itemStack) {
-        int spaceAvailable = BELT_CONTAINER_SIZE - this.getSize();
+        int spaceAvailable = BELT_CONTAINER_SIZE - this.getContainerSize();
         return spaceAvailable;
     }
 
@@ -172,5 +163,77 @@ public class BeltBlockEntity extends BlockEntity implements MenuProvider, Automa
         if (space <= 0) return;
         targetAutomation.insert(itemToMove);
         beltBlockEntity.items.remove(0);
+    }
+    @Override
+    public int getContainerSize() { return items.size(); }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack stack : items) if (!stack.isEmpty()) return false;
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        if (slot < 0 || slot >= this.items.size()) {
+            return ItemStack.EMPTY;
+        }
+        return this.items.get(slot);
+    }
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        // Standard helper provided by Minecraft
+        return ContainerHelper.removeItem(items, slot, amount);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(items, slot);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        items.set(slot, stack);
+        if (stack.getCount() > getMaxStackSize()) {
+            stack.setCount(getMaxStackSize());
+        }
+        setChanged(); // Important for saving!
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        // Standard check to ensure player is close enough
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public void clearContent() { items.clear(); }
+
+    
+    // --- THE FIREWALL (Used by Hoppers/Pipes) ---
+    // This is where you lock out the automation.
+
+    private static final int[] NO_SLOTS = new int[0];
+
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        // Return an empty array. 
+        // Hoppers will see this and think "Oh, this block has no inventory."
+        return NO_SLOTS;
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+        return false; // Double protection: Nothing goes in.
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+        return false; // Double protection: Nothing comes out.
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return DEFAULT_NAME;
     }
 }
