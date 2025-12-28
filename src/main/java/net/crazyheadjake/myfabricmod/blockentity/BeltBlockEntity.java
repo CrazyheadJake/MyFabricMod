@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 import org.jspecify.annotations.Nullable;
 
-import net.crazyheadjake.myfabricmod.AutomationContainer;
+import net.crazyheadjake.myfabricmod.AutomationBlockEntity;
 import net.crazyheadjake.myfabricmod.ModBlockEntities;
 import net.crazyheadjake.myfabricmod.block.InserterBlock;
 import net.crazyheadjake.myfabricmod.menu.BeltMenu;
@@ -14,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class BeltBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider, AutomationContainer {
+public class BeltBlockEntity extends AutomationBlockEntity implements MenuProvider {
     public static final int BELT_CONTAINER_SIZE = 4;
     public static final int BELT_SPEED = 4;
     private int cooldownTime = -1;
@@ -152,7 +151,7 @@ public class BeltBlockEntity extends BlockEntity implements WorldlyContainer, Me
         // If either storage is missing (e.g., pointing at air or a rock), do nothing.
         BlockPos targetPos = blockPos.relative(outputSide);
         BlockState targetState = level.getBlockState(targetPos);
-        AutomationContainer targetAutomation = InserterBlockEntity.getAutomationContainer(level, targetPos, targetState);
+        AutomationBlockEntity targetAutomation = AutomationBlockEntity.getAutomationContainer(level, targetPos, targetState);
         if (targetAutomation == null) return;
 
         // 3. Move the items!
@@ -201,36 +200,7 @@ public class BeltBlockEntity extends BlockEntity implements WorldlyContainer, Me
     }
 
     @Override
-    public boolean stillValid(Player player) {
-        // Standard check to ensure player is close enough
-        return Container.stillValidBlockEntity(this, player);
-    }
-
-    @Override
     public void clearContent() { items.clear(); }
-
-    
-    // --- THE FIREWALL (Used by Hoppers/Pipes) ---
-    // This is where you lock out the automation.
-
-    private static final int[] NO_SLOTS = new int[0];
-
-    @Override
-    public int[] getSlotsForFace(Direction side) {
-        // Return an empty array. 
-        // Hoppers will see this and think "Oh, this block has no inventory."
-        return NO_SLOTS;
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-        return false; // Double protection: Nothing goes in.
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-        return false; // Double protection: Nothing comes out.
-    }
 
     @Override
     public Component getDisplayName() {

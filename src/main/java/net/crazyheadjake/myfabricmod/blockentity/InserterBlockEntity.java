@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import org.jspecify.annotations.Nullable;
 
-import net.crazyheadjake.myfabricmod.AutomationContainer;
+import net.crazyheadjake.myfabricmod.AutomationBlockEntity;
 import net.crazyheadjake.myfabricmod.ModBlockEntities;
 import net.crazyheadjake.myfabricmod.block.InserterBlock;
 import net.crazyheadjake.myfabricmod.menu.InserterMenu;
@@ -82,7 +82,7 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
         // We ask for the storage available on the side FACING our inserter.
         BlockPos sourcePos = blockPos.relative(inputSide);
         BlockState sourceState = level.getBlockState(sourcePos);
-        AutomationContainer sourceAutomation = getAutomationContainer(level, sourcePos, sourceState);
+        AutomationBlockEntity sourceAutomation = AutomationBlockEntity.getAutomationContainer(level, sourcePos, sourceState);
         Container source = getBlockContainer(level, sourcePos, sourceState);
         if (source == null && sourceAutomation == null) return;
 
@@ -111,7 +111,7 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
         BlockPos targetPos = blockPos.relative(outputSide);
         BlockState targetState = level.getBlockState(targetPos);
         Container target = getBlockContainer(level, targetPos, targetState);
-        AutomationContainer targetAutomation = getAutomationContainer(level, targetPos, targetState);
+        AutomationBlockEntity targetAutomation = AutomationBlockEntity.getAutomationContainer(level, targetPos, targetState);
         if (target == null && targetAutomation == null) return;
 
         // 4. Move the items!
@@ -123,7 +123,7 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
             if (targetAutomation != null) {
                 space = targetAutomation.hasSpaceFor(sourceStack);
             } else {
-                space = AutomationContainer.containerHasSpaceFor(target, sourceStack, inputSide, 1);
+                space = AutomationBlockEntity.containerHasSpaceFor(target, sourceStack, inputSide, 1);
             }
             if (space <= 0) continue;
 
@@ -166,12 +166,4 @@ public class InserterBlockEntity extends BlockEntity implements MenuProvider {
 		} 
 		return null;
 	}
-
-    @Nullable
-    public static AutomationContainer getAutomationContainer(Level level, BlockPos blockPos, BlockState blockState) {
-        if (level.getBlockEntity(blockPos) instanceof AutomationContainer automationContainer) {
-            return automationContainer;
-        }
-        return null;
-    }
 }
