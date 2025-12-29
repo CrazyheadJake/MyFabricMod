@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=north,half=lower": {
+      "model": "myfabricmod:block/drill_bottom",
+      "y": 0
+    },
+    "facing=south,half=lower": {
+      "model": "myfabricmod:block/drill_bottom",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "myfabricmod:block/drill_bottom",
+      "y": 270
+    },
+    "facing=east,half=lower": {
+      "model": "myfabricmod:block/drill_bottom",
+      "y": 90
+    },
+    "facing=north,half=upper": {
+      "model": "myfabricmod:block/drill_top",
+      "y": 0
+    },
+    "facing=south,half=upper": {
+      "model": "myfabricmod:block/drill_top",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "myfabricmod:block/drill_top",
+      "y": 270
+    },
+    "facing=east,half=upper": {
+      "model": "myfabricmod:block/drill_top",
+      "y": 90
+    }
+  }
+}

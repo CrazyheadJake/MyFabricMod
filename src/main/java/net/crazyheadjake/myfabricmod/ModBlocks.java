@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.crazyheadjake.myfabricmod.block.BeltBlock;
+import net.crazyheadjake.myfabricmod.block.DrillBlock;
 import net.crazyheadjake.myfabricmod.block.InserterBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -18,12 +19,13 @@ import net.minecraft.core.Registry;
 public class ModBlocks {
     public static final Block BELT = register("belt", BeltBlock::new, BlockBehaviour.Properties.of().sound(SoundType.STONE), true);
     public static final Block INSERTER = register("inserter", InserterBlock::new, BlockBehaviour.Properties.of().sound(SoundType.STONE), true);
-    
+    public static final Block DRILL = register("drill", DrillBlock::new, BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(3.5f), true);
 	
 	public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModItems.CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
 	        itemGroup.accept(ModBlocks.BELT.asItem());
 	        itemGroup.accept(ModBlocks.INSERTER.asItem());
+			itemGroup.accept(ModBlocks.DRILL.asItem());
         });
     }
 

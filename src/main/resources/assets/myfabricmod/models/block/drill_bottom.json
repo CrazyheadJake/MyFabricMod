@@ -1,0 +1,6 @@
+{
+    "textures": {
+        "drill": "block/iron_block",
+        "particle": "#drill"
+    }
+}

@@ -1,0 +1,101 @@
+{
+    "parent": "myfabricmod:block/tallblock",
+    "textures": {
+        "bottom": "block/piston_bottom",
+        "side": "block/piston_side",
+        "inside": "block/piston_inner",
+        "front": "block/piston_inner",
+        "drill": "block/iron_block",
+        "particle": "#side"
+    },
+    "elements": [
+        {   "from": [ 0, 4, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "north":  { "uv": [ 0, 4, 16, 16 ], "texture": "#front", "cullface": "north", "rotation": 180 },
+                "south":    { "uv": [ 0, 4, 16, 16 ], "texture": "#side", "cullface": "south" },
+                "down": { "uv": [ 0, 0, 16, 16 ], "texture": "#inside" },
+                "up": { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "up" },
+                "west":  { "uv": [ 0, 4, 16, 16 ], "texture": "#side", "cullface": "west", "rotation": 180 },
+                "east":  { "uv": [ 0, 4, 16, 16 ], "texture": "#side", "cullface": "east", "rotation": 0 }
+            }
+        },
+        {
+            "from": [ 1, 0, 1 ],
+            "to": [ 15, 4, 15 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 2, -3, 2 ],
+            "to": [ 14, 0, 14 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 3, -6, 3 ],
+            "to": [ 13, -3, 13 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 4, -9, 4 ],
+            "to": [ 12, -6, 12 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 5, -12, 5 ],
+            "to": [ 11, -9, 11 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 6, -15, 6 ],
+            "to": [ 10, -12, 10 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        },
+        {
+            "from": [ 7, -16, 7 ],
+            "to": [ 9, -15, 9 ],
+            "faces": {
+                "north": { "texture": "#drill" },
+                "south": { "texture": "#drill" },
+                "east":  { "texture": "#drill" },
+                "west":  { "texture": "#drill" },
+                "down":  { "texture": "#drill" }
+            }
+        }
+    ]
+}
